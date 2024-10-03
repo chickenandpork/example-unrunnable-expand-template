@@ -1,0 +1,6 @@
+module(
+    name = "example-unrunnable-expand-template",
+    version = "1.0",
+)
+
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.1", dev_dependency = True)

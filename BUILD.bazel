@@ -1,0 +1,21 @@
+load("@aspect_bazel_lib//lib:expand_template.bzl", "expand_template_rule")
+load("@bazel_skylib//rules:write_file.bzl", "write_file")
+
+write_file(
+    name = "template",
+    out = "template.sh",
+    content = [ """echo "ONE TWO THREE" """ ],
+)
+
+#     bazel query --output=build //:hydrate
+expand_template_rule(
+    name = "hydrate",
+    out = "hydrate.sh",
+    is_executable = True,
+    substitutions = {
+        "ONE": "1",
+        "TWO": "2",
+        "THREE": "3",
+    },
+    template = ":template",
+)
